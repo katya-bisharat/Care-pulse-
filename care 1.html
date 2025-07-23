@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Care Pulse - Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      width: 320px;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      color: #5a3e85;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #9b86d1;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #5a3e85;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #3f2d6f;
+    }
+
+    #guestLogin {
+      background-color: #aaa;
+    }
+
+    #guestLogin:hover {
+      background-color: #888;
+    }
+
+    .link {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .link a {
+      color: #5a3e85;
+      text-decoration: none;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" required placeholder="example@email.com" dir="ltr">
+
+      <label for="password">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" required placeholder="••••••••" dir="ltr">
+        <!-- Optional toggle icon:
+        <span class="toggle-password" id="togglePassword">👁️</span>
+        -->
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <button id="guestLogin" type="button">Continue as Guest</button>
+    <div class="link"><a href="#" id="resetPassword">Forgot password?</a></div>
+    <div class="link">Don't have an account? <a href="signup.html">Sign up</a></div>
+  </div>
+
+  <!-- Optional basic interactivity -->
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert("Login submitted. (No backend connected)");
+    });
+
+    document.getElementById('guestLogin').addEventListener('click', function () {
+      alert("Guest login clicked. (No backend connected)");
+    });
+
+    document.getElementById('resetPassword').addEventListener('click', function () {
+      alert("Reset password clicked. (No backend connected)");
+    });
+
+    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Patient Search - Care Pulse</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: linear-gradient(135deg, #83a4d4, #b6fbff);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+      justify-content: center;
+    }
+
+    .filters input, .filters select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #34495e;
+      color: #fff;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Advanced Patient Search</h1>
+
+    <div class="filters">
+      <input type="text" id="nameFilter" placeholder="Search by Name">
+      <select id="typeFilter">
+        <option value="">All Types</option>
+        <option value="Blood Sugar">Blood Sugar</option>
+        <option value="Blood Pressure">Blood Pressure</option>
+        <option value="Heart Rate">Heart Rate</option>
+      </select>
+      <input type="number" id="minValueFilter" placeholder="Min Value">
+      <input type="number" id="maxValueFilter" placeholder="Max Value">
+      <button onclick="applyFilters()">Search</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Reading Type</th>
+          <th>Value</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="resultsTable">
+        <!-- Results go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const fakeData = [
+      { name: "Ali Khaled", type: "Blood Sugar", value: 220, date: "2025-07-14 08:30" },
+      { name: "Sara Ahmad", type: "Blood Pressure", value: 135, date: "2025-07-15 12:45" },
+      { name: "Lina Fares", type: "Heart Rate", value: 80, date: "2025-07-16 09:20" },
+      { name: "Ali Khaled", type: "Blood Pressure", value: 145, date: "2025-07-13 17:10" },
+      { name: "Fadi Hasan", type: "Blood Sugar", value: 190, date: "2025-07-12 07:05" }
+    ];
+
+    function applyFilters() {
+      const name = document.getElementById("nameFilter").value.toLowerCase();
+      const type = document.getElementById("typeFilter").value;
+      const min = parseFloat(document.getElementById("minValueFilter").value);
+      const max = parseFloat(document.getElementById("maxValueFilter").value);
+
+      const filtered = fakeData.filter(entry => {
+        return (
+          (!name  entry.name.toLowerCase().includes(name)) &&
+          (!type  entry.type === type) &&
+          (isNaN(min)  entry.value >= min) &&
+          (isNaN(max)  entry.value <= max)
+        );
+      });
+
+      renderTable(filtered);
+    }
+
+    function renderTable(data) {
+      const table = document.getElementById("resultsTable");
+      if (data.length === 0) {
+        table.innerHTML = <tr><td colspan="4" class="no-results">No matching results.</td></tr>;
+        return;
+      }
+
+      table.innerHTML = data.map(d => `
+        <tr>
+          <td>${d.name}</td>
+          <td>${d.type}</td>
+          <td>${d.value}</td>
+          <td>${d.date}</td>
+        </tr>
+      `).join("");
+    }
+
+    // Load initial data
+    renderTable(fakeData);
+  </script>
+</body>
+</html>

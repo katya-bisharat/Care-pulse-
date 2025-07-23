@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient-Friendly Exercises</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000000; /* changed from #185a9d */
+      text-align: center;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #333;
+      padding: 0.5rem;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #000000; /* changed from #fff to black */
+      animation: fadeInUp 1s ease 0.4s forwards;
+      opacity: 0;
+    }
+
+    .exercise-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .exercise-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .exercise-card:nth-child(1) { animation-delay: 0.6s; }
+    .exercise-card:nth-child(2) { animation-delay: 0.8s; }
+    .exercise-card:nth-child(3) { animation-delay: 1s; }
+    .exercise-card:nth-child(4) { animation-delay: 1.2s; }
+
+    .exercise-card h3 {
+      color: #000000; /* changed from #185a9d */
+      margin-top: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 2rem;
+      animation: fadeIn 1s ease 1.4s forwards;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Patient-Friendly Exercises</h1>
+    <p>A program specially designed for patients with diabetes, blood pressure, and back pain</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="exercises.html">All Exercises</a>
+    <a href="filter.html">Search Exercises</a>
+  </nav>
+
+  <div class="container">
+    <h2>Available Exercises</h2>
+    <div class="exercise-list">
+      <div class="exercise-card">
+        <h3>Walking</h3>
+        <p>Suitable for diabetes and blood pressure</p>
+        <p>Walking for 30 minutes daily improves circulation and lowers blood sugar.</p>
+      </div>
+
+      <div class="exercise-card">
+        <h3>Stretching</h3>
+        <p>Suitable for back pain</p>
+        <p>Stretching exercises help relieve muscle tension and improve flexibility.</p>
+      </div>
+
+      <div class="exercise-card">
+        <h3>Breathing Exercises</h3>
+        <p>Suitable for blood pressure</p>
+        <p>Deep breathing exercises help lower blood pressure and reduce stress.</p>
+      </div>
+
+      <div class="exercise-card">
+        <h3>Yoga</h3>
+        <p>Suitable for all conditions</p>
+        <p>Yoga helps improve strength, flexibility, and balance.</p>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script>
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll("nav a").forEach(link => {
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+</body>
+</html>

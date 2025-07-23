@@ -1,0 +1,38 @@
+[debug] [2025-07-14T23:02:41.019Z] ----------------------------------------------------------------------
+[debug] [2025-07-14T23:02:41.028Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-07-14T23:02:41.028Z] CLI Version:   14.10.1
+[debug] [2025-07-14T23:02:41.028Z] Platform:      win32
+[debug] [2025-07-14T23:02:41.028Z] Node Version:  v22.17.0
+[debug] [2025-07-14T23:02:41.029Z] Time:          Tue Jul 15 2025 02:02:41 GMT+0300 (GMT+03:00)
+[debug] [2025-07-14T23:02:41.029Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-14T23:02:41.035Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-14T23:02:41.036Z] > authorizing via signed-in user (bisharatkatya@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\User\Desktop\myweb
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-07-14T23:12:43.353Z] Checked if tokens are valid: true, expires at: 1752536776412
+[debug] [2025-07-14T23:12:43.354Z] Checked if tokens are valid: true, expires at: 1752536776412
+[debug] [2025-07-14T23:12:43.372Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-07-14T23:13:13.417Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects?pageSize=100, {"headers":{},"method":"GET","signal":{}}): AbortError: The user aborted a request.
+[debug] [2025-07-14T23:13:13.418Z] Timeout reached making request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100
+[debug] [2025-07-14T23:13:14.115Z] FirebaseError: Timeout reached making request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100
+    at RetryOperation._fn (C:\Users\User\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:257:35)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.

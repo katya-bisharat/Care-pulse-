@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exercise by Muscle - Cure Pulse</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #333;
+      padding: 30px;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .body-images {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom: 30px;
+    }
+
+    .body-images img {
+      width: 220px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border-radius: 15px;
+      border: 3px solid #fff;
+    }
+
+    .body-images img:hover {
+      transform: scale(1.05);
+    }
+
+    .muscle-selection, .exercise-section, .muscle-preview {
+      margin-top: 30px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation-fill-mode: forwards;
+    }
+
+    /* Fade-in slide-up animation */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Apply animation when visible */
+    .visible {
+      animation: fadeSlideUp 0.5s ease forwards;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .muscle-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .muscle-buttons button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 30px;
+      background-color: #ffffffcc;
+      color: #185a9d;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .muscle-buttons button:hover {
+      background-color: #ffffff;
+    }
+
+    .muscle-preview img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      margin-bottom: 10px;
+    }
+
+    .exercises {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .exercise {
+      width: 180px;
+      background: #ffffffcc;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .exercise video,
+    .exercise img {
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .exercise-name {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #185a9d;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Select Muscle Pain Area</h1>
+
+  <div class="body-images">
+    <img src="images/front.jpg" onclick="showMuscles('front')">
+    <img src="images/back.jpg" onclick="showMuscles('back')">
+  </div>
+
+  <div class="muscle-selection" id="muscleSelection" style="display:none;">
+    <h2 style="color:#fff;">Choose the specific muscle area</h2>
+    <div class="muscle-buttons" id="muscleButtons"></div>
+  </div>
+
+  <div class="muscle-preview" id="musclePreview" style="display:none;">
+    <img id="muscleIcon" src="" alt="Muscle">
+    <h3 id="muscleName">Muscle Name</h3>
+  </div>
+
+  <div class="exercise-section" id="exerciseSection" style="display:none;">
+    <h2 style="color:#fff;">Recommended Exercises</h2>
+    <div class="exercises" id="exerciseList"></div>
+  </div>
+
+  <script>
+    const muscles = {
+      front: {
+        "Chest": "images/chest.jpg",
+        "Abs": "images/abs.jpg",
+        "Quads": "images/quads.jpg"
+      },
+      back: {
+        "Upper Back": "images/upperb.jpg",
+        "Lower Back": "images/lower.jpg",
+        "Hamstrings": "images/ham.jpg"
+      }
+    };
+
+    const exercises = {
+      "Chest": [
+        { name: "Pull up", gif: "images/pu.mp4" },
+        { name: "Push up", gif: "images/Push-up.gif" }, 
+        { name: "Bench Press", gif: "images/Bench-Press_Chest.mp4" }
+      ],
+      "Abs": [
+        { name: "Crunch", gif: "images/crunch.mp4" }, 
+        { name: "Plank", gif: "images/plank.jpg" },
+        { name: "Leg Raise", gif: "images/leg-raise.gif" }
+      ],
+      "Quads": [
+        { name: "Squats", gif: "images/squatt.mp4" },
+        { name: "Lunges", gif: "images/lunges.mp4" },
+        { name: "Front leg kicks", gif: "images/front_leg_kick.mp4" }
+      ],
+      "Upper Back": [
+        { name: "Pull Ups", gif: "images/pullups.mp4" },
+        { name: "Row Machine", gif: "images/rowmachine.mp4" },
+        { name: "Face Pull", gif: "images/facepull.mp4" }
+      ],
+      "Lower Back": [
+        { name: "Superman", gif: "images/superman.mp4" },
+        { name: "Back Extension", gif: "images/backextension.mp4" },
+        { name: "Bird Dog", gif: "images/birddog.mp4" }
+      ],
+      "Hamstrings": [
+        { name: "Deadlift", gif: "images/deadlift.mp4" },
+        { name: "Leg Curl", gif: "images/legcurl.mp4" },
+        { name: "Glute Bridge", gif: "images/glutebridge.mp4" }
+      ]
+    };
+
+    function showMuscles(area) {
+      const btnContainer = document.getElementById("muscleButtons");
+      btnContainer.innerHTML = '';
+      for (let muscle in muscles[area]) {
+        const btn = document.createElement("button");
+        btn.innerText = muscle;
+        btn.onclick = () => showExercises(muscle, muscles[area][muscle]);
+        btnContainer.appendChild(btn);
+      }
+      const muscleSelection = document.getElementById("muscleSelection");
+      muscleSelection.style.display = "block";
+      muscleSelection.classList.remove('visible'); // reset
+      void muscleSelection.offsetWidth; // trigger reflow
+      muscleSelection.classList.add('visible');
+
+      document.getElementById("exerciseSection").style.display = "none";
+      document.getElementById("musclePreview").style.display = "none";
+    }
+
+    function showExercises(muscleName, muscleImg) {
+      document.getElementById("muscleName").innerText = muscleName;
+      document.getElementById("muscleIcon").src = muscleImg;
+      const musclePreview = document.getElementById("musclePreview");
+      musclePreview.style.display = "block";
+      musclePreview.classList.remove('visible');
+      void musclePreview.offsetWidth;
+      musclePreview.classList.add('visible');
+
+      const exerciseList = document.getElementById("exerciseList");
+      exerciseList.innerHTML = '';
+
+      exercises[muscleName].forEach(ex => {
+        const box = document.createElement("div");
+        box.className = "exercise";
+
+        const isVideo = ex.gif.match(/\.(mp4|webm|ogg)$/i);
+        const media = isVideo
+          ? `<video autoplay loop muted playsinline>
+               <source src="${ex.gif}" type="video/mp4">
+               Your browser does not support the video tag.
+             </video>`
+          : `<img src="${ex.gif}" alt="${ex.name}" />`;
+
+        box.innerHTML = `
+          ${media}
+          <div class="exercise-name">${ex.name}</div>
+        `;
+        exerciseList.appendChild(box);
+      });
+
+      const exerciseSection = document.getElementById("exerciseSection");
+      exerciseSection.style.display = "block";
+      exerciseSection.classList.remove('visible');
+      void exerciseSection.offsetWidth;
+      exerciseSection.classList.add('visible');
+    }
+  </script>
+</body>
+</html>
